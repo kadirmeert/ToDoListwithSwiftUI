@@ -5,9 +5,9 @@
 //  Created by Kadir Yildiz on 15/10/2024.
 //
 
-import FirebaseFirestore
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 
 class RegisterViewViewModel: ObservableObject {
     
@@ -25,13 +25,17 @@ class RegisterViewViewModel: ObservableObject {
         // create user
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let userId = result?.user.uid else {
+                print(error?.localizedDescription ?? "")
                 return
             }
             self?.insertUserRecord(id: userId)
         }
     }
     private func insertUserRecord(id: String) {
-        let newUser = User(id: id, name: name, email: email, joined: Date().timeIntervalSince1970)
+        let newUser = User(id: id,
+                           name: name,
+                           email: email,
+                           joined: Date().timeIntervalSince1970)
         
         let db = Firestore.firestore()
         db.collection("users")

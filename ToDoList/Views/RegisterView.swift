@@ -32,10 +32,11 @@ struct RegisterView: View {
                 
                 CustomButton(
                     title: "Create Account",
-                    backgroundColor: .green) {
-                        viewModel.register()
-                    }
-                    .padding()
+                    backgroundColor: .green)
+                {
+                    viewModel.register()
+                }
+                .padding()
             }
             .offset(y: -50)
             
